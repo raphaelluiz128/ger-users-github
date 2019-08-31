@@ -4,7 +4,8 @@ const schema = new Schema({
 
     login: {
         type: String,
-        required: [true, 'login is required']
+        required: [true, 'login is required'],
+        unique: true
     },
     name: {
         type: String,
@@ -12,13 +13,14 @@ const schema = new Schema({
     },
     cpf: {
         type: Number,
-        required: [true, 'cpf is required']
+        required: [true, 'cpf is required'],
+        unique: true
     },
     password: {
         type: String,
         required: [true, 'password is required']
     },
-    roles: [{
+    roles:[{
         type: String,
         required: [true, 'valor admin ou valor common é necessário '],
         enum: ['common', 'admin'],

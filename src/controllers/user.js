@@ -10,7 +10,7 @@ exports.post = async (req, res, next) => {
 
     let validate = new Validation();
     validate.isEmail(req.body.login, 'E-mail inválido');
-    validate.hasMinLen(req.body.password, 5, 'Senha deve ter no mínimo 6 caracteres');
+    validate.hasMinLen(req.body.password, 6, 'Senha deve ter no mínimo 6 caracteres');
     validate.isFixedLen(req.body.cpf, 11, 'CPF deve ter 11 números');
     validate.isNumber(req.body.cpf, 'CPF deve ser apenas números');
 
@@ -22,16 +22,24 @@ exports.post = async (req, res, next) => {
         name: req.body.name,
         login: req.body.login,
         cpf: req.body.cpf,
-        admin: req.body.admin,
         password: md5(req.body.password + global.SALT_KEY),
-        roles: ["common"]
+        roles: req.body.roles
     });
     try {
-        await user.save();
-        res.status(201).send({ message: 'Usuário cadastrado' });
+        const userNew = await user.save();
+        res.status(201).send({
+            message: 'Usuário cadastrado',
+            data: {
+                name: userNew.name,
+                login: userNew.login,
+                id: userNew._id,
+                cpf: userNew.cpf,
+            }
+        });
     } catch (err) {
-        res.status(400).send({ message: 'Falha ao cadastrar' });
-        console.log(err);
+        res.status(400).send({ message: 'Falha ao cadastrar' ,
+        data: err
+    });
     }
 };
 
@@ -57,12 +65,12 @@ exports.authenticate = async (req, res, next) => {
             roles: user.roles
         });
 
-        res.status(201).send({
+        res.status(200).send({
             token: token,
             data: {
                 email: user.email,
                 name: user.name,
-                roles: user.roles
+
             }
         })
 
