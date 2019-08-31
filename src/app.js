@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config');
+const cors = require('cors');
 
 mongoose.connect(config.connectionString);
 mongoose.connection.on('connected', function () {
@@ -34,5 +35,9 @@ app.use('/', index);
 app.use('/users',userRoute);
 app.use('/folders',folderRoute);
 app.use('/userGHs',userGHRoute);
+
+app.use(cors());
+
+
 
 module.exports = app;
