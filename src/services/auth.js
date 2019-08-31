@@ -1,4 +1,7 @@
 'use strict';
+
+// arquivo que usa jwt para gerenciar tokens e autenticação
+
 const jwt = require('jsonwebtoken');
 
 exports.generateToken = async (data) => {

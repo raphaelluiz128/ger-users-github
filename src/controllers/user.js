@@ -7,7 +7,7 @@ const md5 = require('md5');
 const authService = require('../services/auth');
 
 exports.post = async (req, res, next) => {
-
+// uso do arquivo de validação 'validator' para validar as propriedades necessárias
     let validate = new Validation();
     validate.isEmail(req.body.login, 'E-mail inválido');
     validate.hasMinLen(req.body.password, 6, 'Senha deve ter no mínimo 6 caracteres');
