@@ -1,0 +1,3 @@
+git clone https://github.com/raphaelluiz128/gerenciamento-usuarios-api-github.git
+
+npm start
