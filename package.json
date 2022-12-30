@@ -27,7 +27,7 @@
     "https": "^1.0.0",
     "jsonwebtoken": "^7.4.0",
     "md5": "^2.2.1",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "mockgoose": "^8.0.2",
     "mongoose": "^5.6.11",
     "node-fetch": "^2.6.0",
